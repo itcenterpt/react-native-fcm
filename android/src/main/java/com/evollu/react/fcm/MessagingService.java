@@ -17,12 +17,19 @@ public class MessagingService extends FirebaseMessagingService {
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
-        Log.d(TAG, "Remote message received");
-        Intent i = new Intent("com.evollu.react.fcm.ReceiveNotification");
-        i.putExtra("data", remoteMessage);
-        handleBadge(remoteMessage);
-        buildLocalNotification(remoteMessage);
-        sendOrderedBroadcast(i, null);
+
+        Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.voicisreact");
+        if (launchIntent != null) { 
+            Log.d(TAG, "Remote message received, launching app remotly.");
+            startActivity(launchIntent);
+        }
+        
+        // Log.d(TAG, "Remote message received");
+        // Intent i = new Intent("com.evollu.react.fcm.ReceiveNotification");
+        // i.putExtra("data", remoteMessage);
+        // handleBadge(remoteMessage);
+        // buildLocalNotification(remoteMessage);
+        // sendOrderedBroadcast(i, null);
     }
 
     public void handleBadge(RemoteMessage remoteMessage) {
