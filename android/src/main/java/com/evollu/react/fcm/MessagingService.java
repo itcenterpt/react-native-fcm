@@ -18,7 +18,7 @@ public class MessagingService extends FirebaseMessagingService {
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
 
-        Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.voicisreact");
+        Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.voicisuc.react"); //TODO handle package name.
         if (launchIntent != null) { 
             Log.d(TAG, "Remote message received, launching app remotely.");
             launchIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
